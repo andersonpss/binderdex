@@ -24,16 +24,22 @@ function globalIndex(localIndex) {
 function resolveBinderImage(card){
   // Binder: prioriza imagem em alta qualidade
   if (!card) return null;
-  if (typeof card.image === "string") return card.image + "/high.png";
+  if (typeof card.image === "string") return card.image + "/low.png";
   return card?.images?.high || card?.images?.large || resolveImage(card);
 }
 
 function renderCard(
 div, c, fromIndex) {
+  // garante estrutura padrão do slot (evita duplicações e mantém classes CSS)
+  div.innerHTML = "";
+
+  // garante estrutura padrão do slot (evita duplicações e mantém classes CSS)
+  div.innerHTML = "";
+
   const imgWrap = document.createElement("div");
   imgWrap.className = "binder-media";
 
-  const imgSrc = resolveImage(c) || (typeof c.image === "string" ? c.image + "/high.png" : c.image?.high);
+      const imgSrc = resolveBinderImage(c);
   if (imgSrc) {
     const imgEl = document.createElement("img");
     imgEl.src = imgSrc;
@@ -152,10 +158,13 @@ function goToSetSearch(setId, lang){
 
 function renderCard(
 div, c, fromIndex) {
+  // garante estrutura padrão do slot (evita duplicações e mantém classes CSS)
+  div.innerHTML = "";
+
   const imgWrap = document.createElement("div");
   imgWrap.className = "binder-media";
 
-  const imgSrc = resolveImage(c) || (typeof c.image === "string" ? c.image + "/high.png" : c.image?.high);
+    const imgSrc = resolveBinderImage(c);
   if (imgSrc) {
     const imgEl = document.createElement("img");
     imgEl.src = imgSrc;
@@ -319,62 +328,47 @@ function render() {
 
 async function moveCard(from, to) {
   try {
-    // Guardas básicas
-    from = Number(from);
-    to = Number(to);
-    if (!Number.isFinite(from) || !Number.isFinite(to)) return;
-    if (from === to) return;
-
     const fromPage = Math.floor(Math.max(0, from) / perPage);
-    const toPage = Math.floor(Math.max(0, to) / perPage);
+    const toPage   = Math.floor(Math.max(0, to) / perPage);
 
-    // MESMA PÁGINA: apenas troca (swap) sem empurrar cartas para outras páginas
+    // Helper: chama o endpoint de move (backend faz pop + insert)
+    const postMove = async (fi, ti) => {
+      const r = await fetch(`${API_BASE}/collection/move`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ from_index: fi, to_index: ti }),
+      });
+      if (!r.ok) {
+        let msg = "Falha ao mover";
+        try { msg = (await r.json()).detail || msg; } catch {}
+        throw new Error(msg);
+      }
+    };
+
+    // ✅ REGRA 1: MESMA PÁGINA = SWAP (troca) sem empurrar lista
     if (fromPage === toPage) {
-      // Se o destino estiver vazio/null, não abre gap aqui (use mover de página para reorganização)
-      const target = cards?.[to];
-      if (target == null) return;
-
-      // Faz swap com duas operações /collection/move (sem precisar de endpoint novo)
-      // Caso from < to:
-      //  1) move(from -> to)
-      //  2) move(to-1 -> from)   (pois o item alvo original foi para to-1)
-      // Caso from > to:
-      //  1) move(from -> to)
-      //  2) move(to+1 -> from)  (pois o item alvo original foi para to+1)
-      const ops = [];
-      ops.push({ from_index: from, to_index: to });
-      if (from < to) ops.push({ from_index: to - 1, to_index: from });
-      else ops.push({ from_index: to + 1, to_index: from });
-
-      for (const op of ops) {
-        const r = await fetch(`${API_BASE}/collection/move`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(op),
-        });
-        if (!r.ok) {
-          let msg = "Falha ao mover";
-          try { msg = (await r.json()).detail || msg; } catch {}
-          throw new Error(msg);
-        }
+      // Se o destino estiver vazio/null, não cria gap aqui (gap só via "mudar de página")
+      if (!cards[to] || typeof cards[to] !== "object") {
+        return; // ignora drop em vazio, mantendo regra que você definiu
       }
 
-      // mantém a página atual
+      // Faz swap usando 2 moves (pop/insert) sem alterar as outras posições
+      await postMove(from, to);
+
+      // Após mover 'from' para 'to', a carta que estava em 'to' muda de índice:
+      // - se from < to, ela vai para (to - 1)
+      // - se from > to, ela vai para (to + 1)
+      const displacedIndex = (from < to) ? (to - 1) : (to + 1);
+
+      await postMove(displacedIndex, from);
+
+      // Mantém a página atual (não pula para outra)
       await loadCollection();
       return;
     }
 
-    // OUTRA PÁGINA: mantém o comportamento atual (a carta entra na 1ª posição e empurra as demais)
-    const r = await fetch(`${API_BASE}/collection/move`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ from_index: from, to_index: to }),
-    });
-    if (!r.ok) {
-      let msg = "Falha ao mover";
-      try { msg = (await r.json()).detail || msg; } catch {}
-      throw new Error(msg);
-    }
+    // ✅ REGRA 2: OUTRA PÁGINA = vai para 1º slot da página alvo e empurra o resto
+    await postMove(from, to);
 
     page = Math.floor(Math.max(0, to) / perPage);
     await loadCollection();
@@ -382,6 +376,7 @@ async function moveCard(from, to) {
     alert(e.message || String(e));
   }
 }
+
 
 async function moveToPage(fromIndex) {
   const input = prompt("Mover para qual página?");
