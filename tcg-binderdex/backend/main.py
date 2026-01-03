@@ -19,8 +19,7 @@ app = FastAPI()
 # Permite abrir o frontend via file:// (origin "null") sem bloqueio
 app.add_middleware(
     CORSMiddleware,
-    app.add_middleware(
-     allow_origins=[
+    allow_origins=[
         "https://binderdex.pages.dev/",
          "https://binderdex.onrender.com",
     ],
