@@ -24,22 +24,16 @@ function globalIndex(localIndex) {
 function resolveBinderImage(card){
   // Binder: prioriza imagem em alta qualidade
   if (!card) return null;
-  if (typeof card.image === "string") return card.image + "/low.png";
+  if (typeof card.image === "string") return card.image + "/high.png";
   return card?.images?.high || card?.images?.large || resolveImage(card);
 }
 
 function renderCard(
 div, c, fromIndex) {
-  // garante estrutura padrão do slot (evita duplicações e mantém classes CSS)
-  div.innerHTML = "";
-
-  // garante estrutura padrão do slot (evita duplicações e mantém classes CSS)
-  div.innerHTML = "";
-
   const imgWrap = document.createElement("div");
   imgWrap.className = "binder-media";
 
-      const imgSrc = resolveBinderImage(c);
+  const imgSrc = resolveImage(c) || (typeof c.image === "string" ? c.image + "/high.png" : c.image?.high);
   if (imgSrc) {
     const imgEl = document.createElement("img");
     imgEl.src = imgSrc;
@@ -158,13 +152,10 @@ function goToSetSearch(setId, lang){
 
 function renderCard(
 div, c, fromIndex) {
-  // garante estrutura padrão do slot (evita duplicações e mantém classes CSS)
-  div.innerHTML = "";
-
   const imgWrap = document.createElement("div");
   imgWrap.className = "binder-media";
 
-    const imgSrc = resolveBinderImage(c);
+  const imgSrc = resolveImage(c) || (typeof c.image === "string" ? c.image + "/high.png" : c.image?.high);
   if (imgSrc) {
     const imgEl = document.createElement("img");
     imgEl.src = imgSrc;
@@ -391,6 +382,7 @@ async function moveCard(from, to) {
     alert(e.message || String(e));
   }
 }
+
 async function moveToPage(fromIndex) {
   const input = prompt("Mover para qual página?");
   if (!input) return;
