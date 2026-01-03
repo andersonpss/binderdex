@@ -329,54 +329,45 @@ function render() {
 async function moveCard(from, to) {
   try {
     const fromPage = Math.floor(Math.max(0, from) / perPage);
-    const toPage   = Math.floor(Math.max(0, to) / perPage);
+    const toPage = Math.floor(Math.max(0, to) / perPage);
 
-    // Helper: chama o endpoint de move (backend faz pop + insert)
-    const postMove = async (fi, ti) => {
-      const r = await fetch(`${API_BASE}/collection/move`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ from_index: fi, to_index: ti }),
-      });
-      if (!r.ok) {
-        let msg = "Falha ao mover";
-        try { msg = (await r.json()).detail || msg; } catch {}
-        throw new Error(msg);
-      }
-    };
+    // Regra:
+    // - mesma página: se destino ocupado -> SWAP; se destino vazio -> PLACE (mantém gap no slot original)
+    // - outra página (via mover de página): usa MOVE (empurra os demais para frente na página destino)
+    let endpoint = "/collection/move";
+    let payload = { from_index: from, to_index: to };
 
-    // ✅ REGRA 1: MESMA PÁGINA = SWAP (troca) sem empurrar lista
     if (fromPage === toPage) {
-      // Se o destino estiver vazio/null, não cria gap aqui (gap só via "mudar de página")
-      if (!cards[to] || typeof cards[to] !== "object") {
-        return; // ignora drop em vazio, mantendo regra que você definiu
+      const target = cards[to];
+      if (!target || typeof target !== "object") {
+        endpoint = "/collection/place";
+        payload = { from_index: from, to_index: to };
+      } else {
+        endpoint = "/collection/swap";
+        payload = { a_index: from, b_index: to };
       }
-
-      // Faz swap usando 2 moves (pop/insert) sem alterar as outras posições
-      await postMove(from, to);
-
-      // Após mover 'from' para 'to', a carta que estava em 'to' muda de índice:
-      // - se from < to, ela vai para (to - 1)
-      // - se from > to, ela vai para (to + 1)
-      const displacedIndex = (from < to) ? (to - 1) : (to + 1);
-
-      await postMove(displacedIndex, from);
-
-      // Mantém a página atual (não pula para outra)
-      await loadCollection();
-      return;
     }
 
-    // ✅ REGRA 2: OUTRA PÁGINA = vai para 1º slot da página alvo e empurra o resto
-    await postMove(from, to);
+    const r = await fetch(`${API_BASE}${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-    page = Math.floor(Math.max(0, to) / perPage);
+    if (!r.ok) {
+      let msg = "Falha ao mover";
+      try { msg = (await r.json()).detail || msg; } catch {}
+      throw new Error(msg);
+    }
+
+    // Mantém a página se for swap/place; se for move entre páginas, navega pra página destino
+    if (fromPage !== toPage) page = toPage;
+
     await loadCollection();
   } catch (e) {
     alert(e.message || String(e));
   }
 }
-
 
 async function moveToPage(fromIndex) {
   const input = prompt("Mover para qual página?");
