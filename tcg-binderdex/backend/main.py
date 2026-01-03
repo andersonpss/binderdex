@@ -370,7 +370,7 @@ def list_binders():
             "name": v["name"],
             "readonly": bool(v.get("readonly", False)),
             "favorite": bool(v.get("favorite", False)),
-            "count": len(v.get("cards", [])),
+            "count": sum(1 for c in (v.get("cards", []) or []) if isinstance(c, dict)),
         }
         for k, v in db["binders"].items()
     ]
@@ -412,7 +412,7 @@ def binder_snapshot(binder_id: str, limit: int = 9):
         "name": b.get("name", binder_id),
         "readonly": bool(b.get("readonly", False)),
         "favorite": bool(b.get("favorite", False)),
-        "count": len(cards),
+        "count": sum(1 for c in cards if isinstance(c, dict)),
         "preview": preview,
     }
 
@@ -556,7 +556,7 @@ def export_binder_pdf(binder_id: str):
         c.drawRightString(width - 40, y, f"Página {page_no}")
         y -= 18
         c.setFont("Helvetica", 10)
-        meta = f"Cartas: {len(cards)}  |  Somente leitura: {bool(b.get('readonly'))}  |  Favorito: {bool(b.get('favorite'))}"
+        meta = f"Cartas: {sum(1 for c in cards if isinstance(c, dict))}  |  Somente leitura: {bool(b.get('readonly'))}  |  Favorito: {bool(b.get('favorite'))}"
         c.drawString(40, y, meta)
         return y - 20
 
