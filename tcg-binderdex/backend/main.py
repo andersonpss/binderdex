@@ -22,6 +22,7 @@ app.add_middleware(
     app.add_middleware(
      allow_origins=[
         "https://binderdex.pages.dev/",
+         "https://binderdex.onrender.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
