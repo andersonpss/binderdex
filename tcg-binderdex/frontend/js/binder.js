@@ -328,6 +328,52 @@ function render() {
 
 async function moveCard(from, to) {
   try {
+    // Guardas básicas
+    from = Number(from);
+    to = Number(to);
+    if (!Number.isFinite(from) || !Number.isFinite(to)) return;
+    if (from === to) return;
+
+    const fromPage = Math.floor(Math.max(0, from) / perPage);
+    const toPage = Math.floor(Math.max(0, to) / perPage);
+
+    // MESMA PÁGINA: apenas troca (swap) sem empurrar cartas para outras páginas
+    if (fromPage === toPage) {
+      // Se o destino estiver vazio/null, não abre gap aqui (use mover de página para reorganização)
+      const target = cards?.[to];
+      if (target == null) return;
+
+      // Faz swap com duas operações /collection/move (sem precisar de endpoint novo)
+      // Caso from < to:
+      //  1) move(from -> to)
+      //  2) move(to-1 -> from)   (pois o item alvo original foi para to-1)
+      // Caso from > to:
+      //  1) move(from -> to)
+      //  2) move(to+1 -> from)  (pois o item alvo original foi para to+1)
+      const ops = [];
+      ops.push({ from_index: from, to_index: to });
+      if (from < to) ops.push({ from_index: to - 1, to_index: from });
+      else ops.push({ from_index: to + 1, to_index: from });
+
+      for (const op of ops) {
+        const r = await fetch(`${API_BASE}/collection/move`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(op),
+        });
+        if (!r.ok) {
+          let msg = "Falha ao mover";
+          try { msg = (await r.json()).detail || msg; } catch {}
+          throw new Error(msg);
+        }
+      }
+
+      // mantém a página atual
+      await loadCollection();
+      return;
+    }
+
+    // OUTRA PÁGINA: mantém o comportamento atual (a carta entra na 1ª posição e empurra as demais)
     const r = await fetch(`${API_BASE}/collection/move`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -345,7 +391,6 @@ async function moveCard(from, to) {
     alert(e.message || String(e));
   }
 }
-
 async function moveToPage(fromIndex) {
   const input = prompt("Mover para qual página?");
   if (!input) return;
