@@ -315,6 +315,57 @@ def remove_card(index: int):
 
 
 # ---------- BINDERS ----------
+# ---------- COLLECTION (operações sem empurrar) ----------
+@app.post("/collection/swap")
+def swap_cards(a_index: int = Body(..., embed=True), b_index: int = Body(..., embed=True)):
+    """Troca duas posições sem alterar o restante (ideal para drag&drop na mesma página)."""
+    db = load_db()
+    binder = get_active_binder(db)
+    ensure_not_readonly(binder)
+
+    cards = binder.get("cards", [])
+    if a_index < 0 or b_index < 0:
+        raise HTTPException(status_code=400, detail="Índices inválidos")
+
+    max_i = max(a_index, b_index)
+    if max_i >= len(cards):
+        cards.extend([None] * (max_i - len(cards) + 1))
+
+    cards[a_index], cards[b_index] = cards[b_index], cards[a_index]
+    binder["cards"] = cards
+    save_db(db)
+    return {"status": "ok"}
+
+
+@app.post("/collection/place")
+def place_card(from_index: int = Body(..., embed=True), to_index: int = Body(..., embed=True)):
+    """Move para slot vazio sem empurrar: destino recebe a carta e a origem vira None."""
+    db = load_db()
+    binder = get_active_binder(db)
+    ensure_not_readonly(binder)
+
+    cards = binder.get("cards", [])
+    if from_index < 0 or to_index < 0:
+        raise HTTPException(status_code=400, detail="Índices inválidos")
+
+    max_i = max(from_index, to_index)
+    if max_i >= len(cards):
+        cards.extend([None] * (max_i - len(cards) + 1))
+
+    card = cards[from_index]
+    if not isinstance(card, dict):
+        raise HTTPException(status_code=400, detail="Slot de origem vazio")
+
+    if isinstance(cards[to_index], dict):
+        raise HTTPException(status_code=400, detail="Slot de destino não está vazio")
+
+    cards[to_index] = card
+    cards[from_index] = None
+    binder["cards"] = cards
+    save_db(db)
+    return {"status": "ok"}
+
+
 @app.get("/binders")
 def list_binders():
     db = load_db()
