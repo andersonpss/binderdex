@@ -136,7 +136,7 @@ function mountCarousel(){
 
     const spine = document.createElement("div");
     spine.className = "collection-spine";
-    spine.textContent = "BINDER";
+    spine.textContent = "BINDERDEX";
 
     const cover = document.createElement("div");
     cover.className = "collection-front";
