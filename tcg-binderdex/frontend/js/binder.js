@@ -24,7 +24,7 @@ function globalIndex(localIndex) {
 function resolveBinderImage(card){
   // Binder: prioriza imagem em alta qualidade
   if (!card) return null;
-  if (typeof card.image === "string") return card.image + "/high.png";
+  if (typeof card.image === "string") return card.image + "/low.png";
   return card?.images?.high || card?.images?.large || resolveImage(card);
 }
 
