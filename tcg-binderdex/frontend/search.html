@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TCG BinderDex</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo">TCG</div>
+      <div class="brand-text">
+        <div class="brand-title">BinderDex</div>
+        <div class="brand-subtitle">coleção local • tcgdex</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-btn" onclick="window.location.href='index.html'">Coleção</button>
+      <button class="nav-btn active" aria-current="page">Buscar</button>
+      <button class="nav-btn" onclick="goToBinder()">Fichários</button>
+      <span id="readonlyBadge" class="badge badge-lock" style="display:none;">SOMENTE LEITURA</span>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <div class="panel-row">
+        <div class="select-wrap">
+          <label class="field-label">Fichário</label>
+          <select id="binderSelect" onchange="selectBinderBySelect('binderSelect', search)"></select>
+        </div>
+
+        <div class="lang-wrap">
+          <label class="field-label">Língua</label>
+          <select id="langSelect" onchange="setLangFromUi(); loadSets()">
+            <option value="pt">Português (pt)</option>
+            <option value="en">English (en)</option>
+            <option value="fr">Français (fr)</option>
+            <option value="es">Español (es)</option>
+            <option value="it">Italiano (it)</option>
+            <option value="de">Deutsch (de)</option>
+            <option value="nl">Nederlands (nl)</option>
+            <option value="pl">Polski (pl)</option>
+            <option value="ja">日本語 (ja)</option>
+            <option value="ko">한국어 (ko)</option>
+            <option value="zh-cn">中文 (zh-cn)</option>
+            <option value="ru">Русский (ru)</option>
+          </select>
+        </div>
+
+
+        <div class="set-wrap">
+          <label class="field-label">Set</label>
+          <select id="setSelect" onchange="onSetChanged()">
+            <option value="">Todos os sets</option>
+          </select>
+        </div>
+
+        <div class="toolbar">
+          <button class="icon-btn" title="Novo Fichário" onclick="createBinder('binderSelect', search)">➕</button>
+          <button class="icon-btn" title="Renomear" onclick="renameBinder('binderSelect')">✏️</button>
+          <button class="icon-btn" title="Duplicar" onclick="duplicateBinder('binderSelect', search)">📋</button>
+          <button class="icon-btn" title="Somente leitura" onclick="toggleReadonly('binderSelect')">🔒</button>
+          <button class="icon-btn" title="Favorito" onclick="setFavorite('binderSelect')">⭐</button>
+          <button class="icon-btn" title="Exportar JSON" onclick="exportBinderJSON('binderSelect')">📤</button>
+          <button class="icon-btn" title="Exportar PDF" onclick="exportBinderPDF('binderSelect')">📄</button>
+          <button class="icon-btn danger" title="Excluir Fichário" onclick="deleteBinder('binderSelect', search)">🗑️</button>
+        </div>
+      </div>
+
+      <div class="search-row">
+        <div class="search-wrap">
+          <div class="search-input">
+            <img id="setLogo" class="set-logo" alt="Logo do set" style="display:none;">
+            <input type="text" id="searchInput" placeholder="Buscar carta (ex: Pikachu)" autocomplete="off">
+          </div>
+          <button class="btn btn-primary" onclick="search()">Pesquisar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-wrap">
+      <div id="results" class="results"></div>
+    </section>
+  </main>
+
+  <!-- Modal de detalhes -->
+  <div id="cardModal" class="modal" style="display:none;">
+    <div class="modal-backdrop" onclick="closeCardModal()"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Detalhes da carta">
+      <div class="modal-header">
+        <div class="modal-title">Detalhes</div>
+        <button class="icon-btn" onclick="closeCardModal()" title="Fechar">✕</button>
+      </div>
+      <div id="cardModalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+
+  <script src="js/common.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,806 @@
+{
+  "binders": {
+    "default": {
+      "name": "Pokémon e Treinadores",
+      "cards": [
+        {
+          "id": "sm12-241",
+          "name": "Pikachu",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/241",
+          "set": "Eclipse Cósmico",
+          "number": "241",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-190",
+          "name": "Typhlosion do Ethan",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/190",
+          "set": "Rivais Predestinados",
+          "number": "190",
+          "lang": "pt"
+        },
+        null,
+        {
+          "id": "sm12-239",
+          "name": "Piplup",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/239",
+          "set": "Eclipse Cósmico",
+          "number": "239",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10.5w-171",
+          "name": "Hilda",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10.5w/171",
+          "set": "Fogo Branco",
+          "number": "171",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG13",
+          "name": "Serperior V",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG13",
+          "set": "Tempestade Prateada",
+          "number": "TG13",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG01",
+          "name": "Braixen",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG01",
+          "set": "Tempestade Prateada",
+          "number": "TG01",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG16",
+          "name": "Zeraora V",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG16",
+          "set": "Tempestade Prateada",
+          "number": "TG16",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh9-TG19",
+          "name": "Urshifu Golpe Decisivo VMAX",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh9/TG19",
+          "set": "Astros Cintilantes",
+          "number": "TG19",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG08",
+          "name": "Arcanine de Hisui",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG08",
+          "set": "Origem Perdida",
+          "number": "TG08",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG05",
+          "name": "Pikachu",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG05",
+          "set": "Origem Perdida",
+          "number": "TG05",
+          "lang": "pt"
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "id": "svp-206",
+          "name": "Marnie's Morpeko",
+          "image": "https://assets.tcgdex.net/en/sv/svp/206",
+          "set": "SVP Black Star Promos",
+          "number": "206",
+          "lang": "en"
+        },
+        {
+          "id": "sv10-205",
+          "name": "Greedent do Arven",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/205",
+          "set": "Rivais Predestinados",
+          "number": "205",
+          "lang": "pt"
+        },
+        {
+          "id": "sm2-144",
+          "name": "Hibi",
+          "image": "https://assets.tcgdex.net/pt/sm/sm2/144",
+          "set": "Guardiões Ascendentes",
+          "number": "144",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG20",
+          "name": "Rayquaza VMAX",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG20",
+          "set": "Tempestade Prateada",
+          "number": "TG20",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-227",
+          "name": "Silvally GX",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/227",
+          "set": "Eclipse Cósmico",
+          "number": "227",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-216",
+          "name": "Solgaleo e Lunala GX",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/216",
+          "set": "Eclipse Cósmico",
+          "number": "216",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-75",
+          "name": "Solgaleo e Lunala GX",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/75",
+          "set": "Eclipse Cósmico",
+          "number": "75",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-184",
+          "name": "Silvally GX",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/184",
+          "set": "Eclipse Cósmico",
+          "number": "184",
+          "lang": "pt"
+        },
+        {
+          "id": "sv04.5-239",
+          "name": "Penélope",
+          "image": "https://assets.tcgdex.net/pt/sv/sv04.5/239",
+          "set": "Destinos de Paldea",
+          "number": "239",
+          "lang": "pt"
+        },
+        {
+          "id": "sv09-164",
+          "name": "Ribombee da Lílian",
+          "image": "https://assets.tcgdex.net/pt/sv/sv09/164",
+          "set": "Amigos de Jornada",
+          "number": "164",
+          "lang": "pt"
+        },
+        {
+          "id": "sv09-170",
+          "name": "Wooloo do Lupo",
+          "image": "https://assets.tcgdex.net/pt/sv/sv09/170",
+          "set": "Amigos de Jornada",
+          "number": "170",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh9-TG04",
+          "name": "Jolteon",
+          "image": "https://assets.tcgdex.net/en/swsh/swsh9/TG04",
+          "set": "Brilliant Stars",
+          "number": "TG04",
+          "lang": "en"
+        },
+        {
+          "id": "swsh11-TG20",
+          "name": "Crobat V",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG20",
+          "set": "Origem Perdida",
+          "number": "TG20",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-244",
+          "name": "Gallade",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/244",
+          "set": "Eclipse Cósmico",
+          "number": "244",
+          "lang": "pt"
+        },
+        {
+          "id": "sv09-185",
+          "name": "Zoroark ex do N",
+          "image": "https://assets.tcgdex.net/pt/sv/sv09/185",
+          "set": "Amigos de Jornada",
+          "number": "185",
+          "lang": "pt"
+        },
+        {
+          "id": "svp-189",
+          "name": "N's Zorua",
+          "image": "https://assets.tcgdex.net/en/sv/svp/189",
+          "set": "SVP Black Star Promos",
+          "number": "189",
+          "lang": "en"
+        },
+        {
+          "id": "sv09-167",
+          "name": "Reshiram do N",
+          "image": "https://assets.tcgdex.net/pt/sv/sv09/167",
+          "set": "Amigos de Jornada",
+          "number": "167",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-222",
+          "name": "Reshiram e Zekrom GX",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/222",
+          "set": "Eclipse Cósmico",
+          "number": "222",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-157",
+          "name": "Reshiram e Zekrom GX",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/157",
+          "set": "Eclipse Cósmico",
+          "number": "157",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh9-TG05",
+          "name": "Zekrom",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh9/TG05",
+          "images": null,
+          "set": "Astros Cintilantes",
+          "setId": "swsh9",
+          "number": "TG05",
+          "lang": "pt"
+        },
+        {
+          "id": "sv09-183",
+          "name": "Bellibolt ex da Kissera",
+          "image": "https://assets.tcgdex.net/pt/sv/sv09/183",
+          "set": "Amigos de Jornada",
+          "number": "183",
+          "lang": "pt"
+        },
+        {
+          "id": "sv07-155",
+          "name": "Archaludon",
+          "image": "https://assets.tcgdex.net/pt/sv/sv07/155",
+          "set": "Coroa Estelar",
+          "number": "155",
+          "lang": "pt"
+        },
+        {
+          "id": "sv07-145",
+          "name": "Lileep",
+          "image": "https://assets.tcgdex.net/pt/sv/sv07/145",
+          "set": "Coroa Estelar",
+          "number": "145",
+          "lang": "pt"
+        },
+        {
+          "id": "xy11-114",
+          "name": "Professor Sycamore",
+          "image": "https://assets.tcgdex.net/pt/xy/xy11/114",
+          "set": "Cerco de Vapor",
+          "number": "114",
+          "lang": "pt"
+        },
+        {
+          "id": "dc1-15",
+          "name": "Team Magma's Groudon EX",
+          "image": "https://assets.tcgdex.net/en/xy/dc1/15",
+          "set": "Double Crisis",
+          "number": "15",
+          "lang": "en"
+        },
+        {
+          "id": "sv04.5-238",
+          "name": "Noêmia",
+          "image": "https://assets.tcgdex.net/pt/sv/sv04.5/238",
+          "set": "Destinos de Paldea",
+          "number": "238",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-4",
+          "name": "Vileplume GX",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/4",
+          "set": "Eclipse Cósmico",
+          "number": "4",
+          "lang": "pt"
+        },
+        null,
+        null,
+        {
+          "id": "sm12-237",
+          "name": "Torkoal",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/237",
+          "set": "Eclipse Cósmico",
+          "number": "237",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-238",
+          "name": "Weavile",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/238",
+          "set": "Eclipse Cósmico",
+          "number": "238",
+          "lang": "pt"
+        },
+        {
+          "id": "sv09-163",
+          "name": "Kilowattrel da Kissera",
+          "image": "https://assets.tcgdex.net/pt/sv/sv09/163",
+          "set": "Amigos de Jornada",
+          "number": "163",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-240",
+          "name": "Wishiwashi",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/240",
+          "set": "Eclipse Cósmico",
+          "number": "240",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-243",
+          "name": "Koffing",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/243",
+          "set": "Eclipse Cósmico",
+          "number": "243",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-245",
+          "name": "Mimikyu",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/245",
+          "set": "Eclipse Cósmico",
+          "number": "245",
+          "lang": "pt"
+        },
+        {
+          "id": "sm12-248",
+          "name": "Stoutland",
+          "image": "https://assets.tcgdex.net/pt/sm/sm12/248",
+          "set": "Eclipse Cósmico",
+          "number": "248",
+          "lang": "pt"
+        },
+        {
+          "id": "sv01-218",
+          "name": "Mabosstiff",
+          "image": "https://assets.tcgdex.net/pt/sv/sv01/218",
+          "set": "Escarlate e Violeta",
+          "number": "218",
+          "lang": "pt"
+        },
+        {
+          "id": "swshp-SWSH133",
+          "name": "Lance's Charizard V",
+          "image": "https://assets.tcgdex.net/en/swsh/swshp/SWSH133",
+          "set": "SWSH Black Star Promos",
+          "number": "SWSH133",
+          "lang": "en"
+        },
+        {
+          "id": "sv02-270",
+          "name": "Saguaro",
+          "image": "https://assets.tcgdex.net/pt/sv/sv02/270",
+          "set": "Evoluções em Paldea",
+          "number": "270",
+          "lang": "pt"
+        },
+        {
+          "id": "sv04-193",
+          "name": "Plusle",
+          "image": "https://assets.tcgdex.net/pt/sv/sv04/193",
+          "set": "Fenda Paradoxal",
+          "number": "193",
+          "lang": "pt"
+        },
+        {
+          "id": "sv04-194",
+          "name": "Minun",
+          "image": "https://assets.tcgdex.net/pt/sv/sv04/194",
+          "set": "Fenda Paradoxal",
+          "number": "194",
+          "lang": "pt"
+        },
+        {
+          "id": "sv04-254",
+          "name": "Mélia",
+          "image": "https://assets.tcgdex.net/pt/sv/sv04/254",
+          "set": "Fenda Paradoxal",
+          "number": "254",
+          "lang": "pt"
+        },
+        {
+          "id": "sv04-256",
+          "name": "Vitalidade da Professora Arka",
+          "image": "https://assets.tcgdex.net/pt/sv/sv04/256",
+          "set": "Fenda Paradoxal",
+          "number": "256",
+          "lang": "pt"
+        },
+        {
+          "id": "sv04-257",
+          "name": "Hipótese do Professor Turo",
+          "image": "https://assets.tcgdex.net/pt/sv/sv04/257",
+          "set": "Fenda Paradoxal",
+          "number": "257",
+          "lang": "pt"
+        },
+        {
+          "id": "sv05-169",
+          "name": "Charjabug",
+          "image": "https://assets.tcgdex.net/pt/sv/sv05/169",
+          "set": "Forças Temporais",
+          "number": "169",
+          "lang": "pt"
+        },
+        {
+          "id": "sv05-174",
+          "name": "Excadrill",
+          "image": "https://assets.tcgdex.net/pt/sv/sv05/174",
+          "set": "Forças Temporais",
+          "number": "174",
+          "lang": "pt"
+        },
+        {
+          "id": "sv05-209",
+          "name": "Dedicação da Bianca",
+          "image": "https://assets.tcgdex.net/pt/sv/sv05/209",
+          "set": "Forças Temporais",
+          "number": "209",
+          "lang": "pt"
+        },
+        {
+          "id": "sv05-210",
+          "name": "Êri",
+          "image": "https://assets.tcgdex.net/pt/sv/sv05/210",
+          "set": "Forças Temporais",
+          "number": "210",
+          "lang": "pt"
+        },
+        {
+          "id": "sv05-211",
+          "name": "Convicção do Morty",
+          "image": "https://assets.tcgdex.net/pt/sv/sv05/211",
+          "set": "Forças Temporais",
+          "number": "211",
+          "lang": "pt"
+        },
+        null,
+        {
+          "id": "sv03-227",
+          "name": "Poppy",
+          "image": "https://assets.tcgdex.net/pt/sv/sv03/227",
+          "set": "Obsidiana em Chamas",
+          "number": "227",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG03",
+          "name": "Charizard",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG03",
+          "set": "Origem Perdida",
+          "number": "TG03",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG04",
+          "name": "Chandelure",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG04",
+          "set": "Origem Perdida",
+          "number": "TG04",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG07",
+          "name": "Banette",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG07",
+          "set": "Origem Perdida",
+          "number": "TG07",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG09",
+          "name": "Spiritomb",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG09",
+          "set": "Origem Perdida",
+          "number": "TG09",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG11",
+          "name": "Castform",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG11",
+          "set": "Origem Perdida",
+          "number": "TG11",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG14",
+          "name": "Centiskorch V",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG14",
+          "set": "Origem Perdida",
+          "number": "TG14",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG18",
+          "name": "Enamorus V",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG18",
+          "set": "Origem Perdida",
+          "number": "TG18",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh11-TG22",
+          "name": "Eternatus VMAX",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh11/TG22",
+          "set": "Origem Perdida",
+          "number": "TG22",
+          "lang": "pt"
+        },
+        {
+          "id": "xy3-110",
+          "name": "Pesquisador de Fósseis",
+          "image": "https://assets.tcgdex.net/pt/xy/xy3/110",
+          "set": "Punhos Furiosos",
+          "number": "110",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12.5-GG66",
+          "name": "Roxanne",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12.5/GG66",
+          "set": "Realeza Absoluta",
+          "number": "GG66",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12.5-GG61",
+          "name": "Vigor da Gardênia",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12.5/GG61",
+          "set": "Realeza Absoluta",
+          "number": "GG61",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12.5-GG58",
+          "name": "Cuidado do Cheren",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12.5/GG58",
+          "set": "Realeza Absoluta",
+          "number": "GG58",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-232",
+          "name": "Garchomp ex da Cíntia",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/232",
+          "set": "Rivais Predestinados",
+          "number": "232",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-203",
+          "name": "Meowth da Equipe Rocket",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/203",
+          "set": "Rivais Predestinados",
+          "number": "203",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-202",
+          "name": "Raticate da Equipe Rocket",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/202",
+          "set": "Rivais Predestinados",
+          "number": "202",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-200",
+          "name": "Murkrow da Equipe Rocket",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/200",
+          "set": "Rivais Predestinados",
+          "number": "200",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-199",
+          "name": "Weezing da Equipe Rocket",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/199",
+          "set": "Rivais Predestinados",
+          "number": "199",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-191",
+          "name": "Houndoom da Equipe Rocket",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/191",
+          "set": "Rivais Predestinados",
+          "number": "191",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-194",
+          "name": "Lapras da Misty",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/194",
+          "set": "Rivais Predestinados",
+          "number": "194",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-193",
+          "name": "Psyduck da Misty",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/193",
+          "set": "Rivais Predestinados",
+          "number": "193",
+          "lang": "pt"
+        },
+        null,
+        {
+          "id": "sv10-187",
+          "name": "Spidops da Equipe Rocket",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/187",
+          "set": "Rivais Predestinados",
+          "number": "187",
+          "lang": "pt"
+        },
+        {
+          "id": "sv10-184",
+          "name": "Roserade da Cíntia",
+          "image": "https://assets.tcgdex.net/pt/sv/sv10/184",
+          "set": "Rivais Predestinados",
+          "number": "184",
+          "lang": "pt"
+        },
+        {
+          "id": "svp-053",
+          "name": "Mew ex",
+          "image": "https://assets.tcgdex.net/pt/sv/svp/053",
+          "set": "SVP Black Star Promos",
+          "number": "053",
+          "lang": "pt"
+        },
+        null,
+        {
+          "id": "svp-207",
+          "name": "Steven's Beldum",
+          "image": "https://assets.tcgdex.net/en/sv/svp/207",
+          "set": "SVP Black Star Promos",
+          "number": "207",
+          "lang": "en"
+        },
+        {
+          "id": "swsh12-TG21",
+          "name": "Duraludon VMAX",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG21",
+          "set": "Tempestade Prateada",
+          "number": "TG21",
+          "lang": "pt"
+        },
+        null,
+        {
+          "id": "swsh12-TG12",
+          "name": "Kricketune V",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG12",
+          "set": "Tempestade Prateada",
+          "number": "TG12",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG11",
+          "name": "Altaria",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG11",
+          "set": "Tempestade Prateada",
+          "number": "TG11",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG10",
+          "name": "Smeargle",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG10",
+          "set": "Tempestade Prateada",
+          "number": "TG10",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG09",
+          "name": "Druddigon",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG09",
+          "set": "Tempestade Prateada",
+          "number": "TG09",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG08",
+          "name": "Passimian",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG08",
+          "set": "Tempestade Prateada",
+          "number": "TG08",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG07",
+          "name": "Rockruff",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG07",
+          "set": "Tempestade Prateada",
+          "number": "TG07",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG06",
+          "name": "Malamar",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG06",
+          "set": "Tempestade Prateada",
+          "number": "TG06",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG05",
+          "name": "Gardevoir",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG05",
+          "set": "Tempestade Prateada",
+          "number": "TG05",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG04",
+          "name": "Jynx",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG04",
+          "set": "Tempestade Prateada",
+          "number": "TG04",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG03",
+          "name": "Flaaffy",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG03",
+          "set": "Tempestade Prateada",
+          "number": "TG03",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh12-TG02",
+          "name": "Milotic",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh12/TG02",
+          "set": "Tempestade Prateada",
+          "number": "TG02",
+          "lang": "pt"
+        },
+        {
+          "id": "swsh9-TG22",
+          "name": "Umbreon V",
+          "image": "https://assets.tcgdex.net/pt/swsh/swsh9/TG22",
+          "set": "Astros Cintilantes",
+          "number": "TG22",
+          "lang": "pt"
+        },
+        {
+          "id": "xy2-88a",
+          "name": "Blacksmith",
+          "image": "https://assets.tcgdex.net/en/xy/xy2/88a",
+          "set": "Flashfire",
+          "number": "88a",
+          "lang": "en"
+        },
+        {
+          "id": "dc1-6",
+          "name": "Team Aqua's Kyogre EX",
+          "image": "https://assets.tcgdex.net/en/xy/dc1/6",
+          "images": null,
+          "set": "Double Crisis",
+          "setId": "dc1",
+          "number": "6",
+          "lang": "en"
+        }
+      ],
+      "readonly": false,
+      "favorite": true
+    }
+  },
+  "active": "default"
+}

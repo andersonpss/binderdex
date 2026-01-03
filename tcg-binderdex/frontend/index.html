@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TCG BinderDex • Coleção</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand" style="cursor:pointer;" onclick="window.location.href='search.html'">
+      <div class="logo">TCG</div>
+      <div class="brand-text">
+        <div class="brand-title">BinderDex</div>
+        <div class="brand-subtitle">coleção • carrossel 3D</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-btn active" aria-current="page">Coleção</button>
+      <button class="nav-btn" onclick="window.location.href='search.html'">Buscar</button>
+      <button class="nav-btn" onclick="window.location.href='binder.html'">Fichários</button>
+      <span id="readonlyBadge" class="badge badge-lock" style="display:none;">SOMENTE LEITURA</span>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <div class="panel-row" style="align-items:flex-end;">
+        <div style="flex:1 1 auto;">
+          <label class="field-label">Coleção</label>
+          <div style="font-weight:900; font-size:16px;">Seus fichários</div>
+          <div style="color:var(--muted); font-size:12px; margin-top:4px;">
+            Arraste / scroll / setas para navegar. Clique no fichário para abrir.
+          </div>
+        </div>
+
+        <!-- reutiliza suas funções existentes do common.js -->
+        <div class="toolbar">
+          <button class="icon-btn" title="Novo fichário" onclick="createBinderFromCollection()">➕</button>
+          <button class="icon-btn" title="Renomear" onclick="renameBinderFromCollection()">✏️</button>
+          <button class="icon-btn" title="Duplicar" onclick="duplicateBinderFromCollection()">📋</button>
+          <button class="icon-btn" title="Somente leitura" onclick="toggleReadonlyFromCollection()">🔒</button>
+          <button class="icon-btn" title="Favorito" onclick="favoriteFromCollection()">⭐</button>
+          <button class="icon-btn danger" title="Excluir fichário" onclick="deleteBinderFromCollection()">🗑️</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="collection-stage">
+      <button class="carousel-nav" onclick="carouselPrev()" aria-label="Anterior">‹</button>
+
+      <div class="carousel-viewport">
+        <div id="carousel" class="carousel"></div>
+      </div>
+
+      <button class="carousel-nav" onclick="carouselNext()" aria-label="Próximo">›</button>
+    </section>
+
+    <section class="collection-meta-wrap">
+      <div id="carouselMeta" class="collection-meta"></div>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/collection.js"></script>
+</body>
+</html>
