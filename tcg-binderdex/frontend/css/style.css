@@ -1122,11 +1122,11 @@ select:focus{
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: space-around;
 }
 
 /* melhora em telas menores */
-@media (max-width: 520px){
+@media (max-width: 560px){
   .binder-overlay{
     padding: 8px;
     gap: 5px;
