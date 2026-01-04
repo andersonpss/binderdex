@@ -113,17 +113,6 @@ div, c, fromIndex) {
   const overlay = document.createElement("div");
   overlay.className = "binder-overlay";
 
-  const toggleBtn = document.createElement("button");
-  toggleBtn.className = "icon-btn overlay-toggle";
-  toggleBtn.type = "button";
-  toggleBtn.title = "Ações";
-  toggleBtn.textContent = "⋯";
-  toggleBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleOverlay(div, fromIndex);
-  });
-
 
   const title = document.createElement("div");
   title.className = "binder-title";
@@ -168,7 +157,6 @@ div, c, fromIndex) {
   overlay.appendChild(actions);
 
   div.appendChild(imgWrap);
-  div.appendChild(toggleBtn);
   div.appendChild(overlay);
 }
 
@@ -251,17 +239,6 @@ div, c, fromIndex) {
   const overlay = document.createElement("div");
   overlay.className = "binder-overlay";
 
-  const toggleBtn = document.createElement("button");
-  toggleBtn.className = "icon-btn overlay-toggle";
-  toggleBtn.type = "button";
-  toggleBtn.title = "Ações";
-  toggleBtn.textContent = "⋯";
-  toggleBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleOverlay(div, fromIndex);
-  });
-
 
   
 const setRow = document.createElement("div");
@@ -341,7 +318,6 @@ const title = document.createElement("div");
   overlay.appendChild(actions);
 
   div.appendChild(imgWrap);
-  div.appendChild(toggleBtn);
   div.appendChild(overlay);
 }
 
@@ -421,7 +397,15 @@ function render() {
         moveCard(fromIdx, g);
         return;
       }
-      // normal mode: open details like before
+      // normal mode: toggle overlay on click/tap release
+      toggleOverlay(div, g);
+});
+
+    // Double click opens details (desktop). On mobile, use ℹ️ inside the overlay.
+    div.addEventListener("dblclick", (e) => {
+      if (__layoutEditMode) return;
+      e.preventDefault();
+      e.stopPropagation();
       closeAllOverlays();
       openCardModal(c.id, c.lang);
     });
