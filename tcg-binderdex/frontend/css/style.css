@@ -1132,3 +1132,9 @@ select:focus{
     pointer-events: auto;
   }
 }
+
+/* Não mostrar overlay enquanto o mouse estiver pressionado */
+.binder-slot.is-pressing .binder-overlay{
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
