@@ -1041,7 +1041,7 @@ select:focus{
   transition: opacity .12s ease, transform .12s ease;
   background: rgba(0,0,0,.62);
   backdrop-filter: blur(6px);
-  border-radius: 12px;
+  border-radius: 6px;
   box-sizing: border-box;
 }
 
@@ -1120,7 +1120,7 @@ select:focus{
 /* botões sempre cabem */
 .binder-actions{
   display: flex;
-  gap: 6px;
+  gap: 4px;
   flex-wrap: wrap;
   justify-content: flex-end;
 }
