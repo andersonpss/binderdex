@@ -407,7 +407,7 @@ select:focus{
 }
 .binder-actions{
   margin-top: 8px;
-  display:flex;
+  display:center;
   justify-content:space-between;
   gap: 8px;
 }
