@@ -24,16 +24,22 @@ function globalIndex(localIndex) {
 function resolveBinderImage(card){
   // Binder: prioriza imagem em alta qualidade
   if (!card) return null;
-  if (typeof card.image === "string") return card.image + "/high.png";
+  if (typeof card.image === "string") return card.image + "/low.png";
   return card?.images?.high || card?.images?.large || resolveImage(card);
 }
 
 function renderCard(
 div, c, fromIndex) {
+  // garante estrutura padrão do slot (evita duplicações e mantém classes CSS)
+  div.innerHTML = "";
+
+  // garante estrutura padrão do slot (evita duplicações e mantém classes CSS)
+  div.innerHTML = "";
+
   const imgWrap = document.createElement("div");
   imgWrap.className = "binder-media";
 
-  const imgSrc = resolveImage(c) || (typeof c.image === "string" ? c.image + "/high.png" : c.image?.high);
+      const imgSrc = resolveBinderImage(c);
   if (imgSrc) {
     const imgEl = document.createElement("img");
     imgEl.src = imgSrc;
@@ -152,10 +158,13 @@ function goToSetSearch(setId, lang){
 
 function renderCard(
 div, c, fromIndex) {
+  // garante estrutura padrão do slot (evita duplicações e mantém classes CSS)
+  div.innerHTML = "";
+
   const imgWrap = document.createElement("div");
   imgWrap.className = "binder-media";
 
-  const imgSrc = resolveImage(c) || (typeof c.image === "string" ? c.image + "/high.png" : c.image?.high);
+    const imgSrc = resolveBinderImage(c);
   if (imgSrc) {
     const imgEl = document.createElement("img");
     imgEl.src = imgSrc;
@@ -258,11 +267,7 @@ function render() {
   const binder = document.getElementById("binder");
   binder.innerHTML = "";
 
-  
-
-  let isTouch = false;
-  try { isTouch = matchMedia("(hover: none) and (pointer: coarse)").matches; } catch {}
-for (let i = 0; i < perPage; i++) {
+  for (let i = 0; i < perPage; i++) {
     const g = globalIndex(i);
     const c = cards[g];
 
@@ -275,7 +280,7 @@ for (let i = 0; i < perPage; i++) {
       label.textContent = "Vazio";
       div.appendChild(label);
 
-      if (!__activeBinderMeta?.readonly && !isTouch) {
+      if (!__activeBinderMeta?.readonly) {
         div.addEventListener("dragover", (e) => e.preventDefault());
         div.addEventListener("drop", (e) => {
           e.preventDefault();
@@ -292,14 +297,16 @@ for (let i = 0; i < perPage; i++) {
 
     const div = document.createElement("div");
     div.className = "binder-slot";
+
+    const isTouch = matchMedia("(hover: none) and (pointer: coarse)").matches;
     div.draggable = !__activeBinderMeta?.readonly && !isTouch;
+
 
     renderCard(div, c, g);
     div.addEventListener("click", () => openCardModal(c.id, c.lang));
 
-    if (!__activeBinderMeta?.readonly && !isTouch) {
+    if (!__activeBinderMeta?.readonly) {
       div.addEventListener("dragstart", (e) => {
-        if (isTouch) { e.preventDefault(); return; }
         e.dataTransfer.setData("from", String(g));
       });
 
@@ -324,18 +331,41 @@ for (let i = 0; i < perPage; i++) {
 
 async function moveCard(from, to) {
   try {
-    const r = await fetch(${API_BASE}${endpoint}, {
+    const fromPage = Math.floor(Math.max(0, from) / perPage);
+    const toPage = Math.floor(Math.max(0, to) / perPage);
+
+    // Regra:
+    // - mesma página: se destino ocupado -> SWAP; se destino vazio -> PLACE (mantém gap no slot original)
+    // - outra página (via mover de página): usa MOVE (empurra os demais para frente na página destino)
+    let endpoint = "/collection/move";
+    let payload = { from_index: from, to_index: to };
+
+    if (fromPage === toPage) {
+      const target = cards[to];
+      if (!target || typeof target !== "object") {
+        endpoint = "/collection/place";
+        payload = { from_index: from, to_index: to };
+      } else {
+        endpoint = "/collection/swap";
+        payload = { a_index: from, b_index: to };
+      }
+    }
+
+    const r = await fetch(`${API_BASE}${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ from_index: from, to_index: to }),
+      body: JSON.stringify(payload),
     });
+
     if (!r.ok) {
       let msg = "Falha ao mover";
       try { msg = (await r.json()).detail || msg; } catch {}
       throw new Error(msg);
     }
 
-    page = Math.floor(Math.max(0, to) / perPage);
+    // Mantém a página se for swap/place; se for move entre páginas, navega pra página destino
+    if (fromPage !== toPage) page = toPage;
+
     await loadCollection();
   } catch (e) {
     alert(e.message || String(e));
@@ -361,7 +391,7 @@ async function removeCard(index) {
   if (!ok) return;
 
   try {
-    const r = await fetch(${API_BASE}/collection/remove?index=${encodeURIComponent(index)}, { method: "POST" });
+    const r = await fetch(`${API_BASE}/collection/remove?index=${encodeURIComponent(index)}`, { method: "POST" });
     if (!r.ok) {
       let msg = "Falha ao remover";
       try { msg = (await r.json()).detail || msg; } catch {}
