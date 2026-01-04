@@ -2,6 +2,11 @@ let cards = [];
 let page = 0;
 const perPage = 9;
 
+// UI state (binder)
+let __layoutEditMode = false; // when true: tap/click to move (mobile-friendly)
+let __layoutMoveFrom = null;  // global index selected as source
+let __openOverlayIndex = null; // global index currently showing overlay
+
 function effectiveLength(){
   for (let i = cards.length - 1; i >= 0; i--){
     if (cards[i] && typeof cards[i] === "object") return i + 1;
@@ -71,7 +76,16 @@ div, c, fromIndex) {
 
   const readonly = !!__activeBinderMeta?.readonly;
 
-  const btnRemove = document.createElement("button");
+    const btnInfo = document.createElement("button");
+  btnInfo.className = "icon-btn";
+  btnInfo.title = "Detalhes";
+  btnInfo.textContent = "ℹ️";
+  btnInfo.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openCardModal(c.id, c.lang);
+  });
+
+const btnRemove = document.createElement("button");
   btnRemove.className = "icon-btn danger";
   btnRemove.title = "Remover";
   btnRemove.textContent = "🗑️";
@@ -91,7 +105,8 @@ div, c, fromIndex) {
     moveToPage(fromIndex);
   });
 
-  actions.appendChild(btnRemove);
+    actions.appendChild(btnInfo);
+actions.appendChild(btnRemove);
   actions.appendChild(btnMove);
 
   overlay.appendChild(title);
@@ -230,7 +245,16 @@ const title = document.createElement("div");
 
   const readonly = !!__activeBinderMeta?.readonly;
 
-  const btnRemove = document.createElement("button");
+    const btnInfo = document.createElement("button");
+  btnInfo.className = "icon-btn";
+  btnInfo.title = "Detalhes";
+  btnInfo.textContent = "ℹ️";
+  btnInfo.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openCardModal(c.id, c.lang);
+  });
+
+const btnRemove = document.createElement("button");
   btnRemove.className = "icon-btn danger";
   btnRemove.title = "Remover";
   btnRemove.textContent = "🗑️";
@@ -250,7 +274,8 @@ const title = document.createElement("div");
     moveToPage(fromIndex);
   });
 
-  actions.appendChild(btnRemove);
+    actions.appendChild(btnInfo);
+actions.appendChild(btnRemove);
   actions.appendChild(btnMove);
 
   overlay.appendChild(setRow);
@@ -263,9 +288,52 @@ const title = document.createElement("div");
 }
 
 
+
+function closeAllOverlays(){
+  const binder = document.getElementById("binder");
+  if (!binder) return;
+  binder.querySelectorAll(".binder-slot.is-open").forEach(el => el.classList.remove("is-open"));
+  __openOverlayIndex = null;
+}
+
+function setLayoutHint(){
+  const hint = document.getElementById("layoutHintText");
+  const btn = document.getElementById("layoutModeBtn");
+  if (btn){
+    btn.classList.toggle("active", __layoutEditMode);
+    btn.setAttribute("aria-pressed", __layoutEditMode ? "true" : "false");
+    btn.title = __layoutEditMode ? "Sair do modo layout" : "Editar layout";
+  }
+  if (hint){
+    if (__layoutEditMode){
+      hint.textContent = "Modo layout: toque na carta de origem e depois no destino.";
+    }else{
+      hint.textContent = "Toque/clique na carta para ver ações. Para reorganizar no celular, ative 🧩 (modo layout).";
+    }
+  }
+}
+
+function toggleLayoutMode(){
+  if (__activeBinderMeta?.readonly) return;
+  __layoutEditMode = !__layoutEditMode;
+  __layoutMoveFrom = null;
+  closeAllOverlays();
+  render();
+  setLayoutHint();
+}
+
+function clearMoveSelection(){
+  __layoutMoveFrom = null;
+  const binder = document.getElementById("binder");
+  if (!binder) return;
+  binder.querySelectorAll(".binder-slot.is-selected").forEach(el => el.classList.remove("is-selected"));
+}
+
+
 function render() {
   const binder = document.getElementById("binder");
   binder.innerHTML = "";
+  binder.classList.toggle("layout-edit", __layoutEditMode);
 
   for (let i = 0; i < perPage; i++) {
     const g = globalIndex(i);
@@ -279,6 +347,20 @@ function render() {
       label.className = "empty-label";
       label.textContent = "Vazio";
       div.appendChild(label);
+
+      // click/tap on empty slot
+      div.addEventListener("click", (e) => {
+        if (__layoutEditMode && !__activeBinderMeta?.readonly && __layoutMoveFrom !== null) {
+          e.preventDefault();
+          e.stopPropagation();
+          const fromIdx = __layoutMoveFrom;
+          clearMoveSelection();
+          moveCard(fromIdx, g);
+          return;
+        }
+        // normal mode: close overlays
+        closeAllOverlays();
+      });
 
       if (!__activeBinderMeta?.readonly) {
         div.addEventListener("dragover", (e) => e.preventDefault());
@@ -299,11 +381,43 @@ function render() {
     div.className = "binder-slot";
 
     const isTouch = matchMedia("(hover: none) and (pointer: coarse)").matches;
-    div.draggable = !__activeBinderMeta?.readonly && !isTouch;
+    div.draggable = !__activeBinderMeta?.readonly && !isTouch && !__layoutEditMode;
 
 
     renderCard(div, c, g);
-    div.addEventListener("click", () => openCardModal(c.id, c.lang));
+    div.addEventListener("click", (e) => {
+      // Click/tap behavior:
+      // - normal mode: toggle overlay (actions)
+      // - layout mode: select source + destination to move (mobile-friendly)
+      if (__layoutEditMode) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeAllOverlays();
+        const binderEl = document.getElementById("binder");
+        binderEl?.querySelectorAll(".binder-slot.is-selected").forEach(el => el.classList.remove("is-selected"));
+        if (__layoutMoveFrom === null) {
+          __layoutMoveFrom = g;
+          div.classList.add("is-selected");
+          return;
+        }
+        if (__layoutMoveFrom === g) {
+          clearMoveSelection();
+          return;
+        }
+        const fromIdx = __layoutMoveFrom;
+        clearMoveSelection();
+        moveCard(fromIdx, g);
+        return;
+      }
+
+      // normal mode: toggle overlay
+      const alreadyOpen = div.classList.contains("is-open");
+      closeAllOverlays();
+      if (!alreadyOpen) {
+        div.classList.add("is-open");
+        __openOverlayIndex = g;
+      }
+    });
 
     if (!__activeBinderMeta?.readonly) {
       div.addEventListener("dragstart", (e) => {
@@ -427,7 +541,28 @@ function refreshReadonlyUi() {
   updateReadonlyBadge();
 }
 
+
+document.addEventListener("click", (e) => {
+  const slot = e.target?.closest?.(".binder-slot");
+  const inBinder = e.target?.closest?.("#binder");
+  if (!inBinder) {
+    closeAllOverlays();
+    if (!__layoutEditMode) clearMoveSelection();
+    return;
+  }
+  // If click is inside binder but not on a slot, close overlays
+  if (!slot) closeAllOverlays();
+}, true);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape"){
+    closeAllOverlays();
+    clearMoveSelection();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
   await loadBindersIntoSelect("binderSelect");
   await loadCollection();
+  setLayoutHint();
 });
