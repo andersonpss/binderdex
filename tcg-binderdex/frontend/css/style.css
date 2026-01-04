@@ -1021,33 +1021,44 @@ select:focus{
 /* garante que o overlay fique preso no slot */
 .binder-slot { position: relative; overflow: hidden; }
 
+
 /* overlay base */
 .binder-overlay{
   position: absolute;
-  inset: 0;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  top: auto;              /* altura dinâmica */
+  height: auto;
+  max-height: calc(100% - 16px);
+  padding: 10px 10px 8px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 6px;
-
-  padding: 10px;
-  background: rgba(0,0,0,.55); /* escuro translúcido */
-  color: #fff;
-
+  gap: 8px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .15s ease;
-
-  /* evita estourar em cartas pequenas */
-  max-height: 100%;
+  transform: translateY(6px);
+  transition: opacity .12s ease, transform .12s ease;
+  background: rgba(0,0,0,.62);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
   box-sizing: border-box;
 }
 
-/* mostrar no hover (desktop) */
+/* mostrar apenas no clique (JS adiciona .is-open no slot) */
 .binder-slot.is-open .binder-overlay{
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
 }
+
+/* no modo edição de layout, nunca mostrar overlay */
+.binder.layout-edit .binder-slot .binder-overlay{
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+
 /* linha do set (logo + nome) */
 .binder-setrow{
   display: flex;
@@ -1162,17 +1173,31 @@ select:focus{
 .binder.layout-edit .binder-slot.is-open .binder-overlay{ opacity:0; pointer-events:none; }
 
 .mode-indicator{
-  display:inline-flex;
+  display:flex;
   align-items:center;
+  justify-content:center;
   gap:8px;
-  padding:6px 10px;
-  border-radius: 999px;
-  background: rgba(234,179,8,.18);
-  border: 1px solid rgba(234,179,8,.35);
-  color: rgba(255,255,255,.92);
-  font-weight: 700;
+  padding:10px 12px;
+  border-radius: 12px;
+  background: rgba(234,179,8,.14);
+  border: 2px solid rgba(234,179,8,.75);
+  color: rgba(255,255,255,.95);
+  font-weight: 800;
   letter-spacing: .3px;
-  margin: 8px 0 10px;
+  margin: 10px 0 12px;
+}
+
+/* Badge do indicador (mantém o texto original, só adiciona a “tag”) */
+.mode-indicator::before{
+  content: "EDIT";
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(245,158,11,.22);
+  border: 1px solid rgba(245,158,11,.45);
+  color: rgba(255,255,255,.96);
 }
 
 .binder-slot.is-selected{
