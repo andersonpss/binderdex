@@ -1010,3 +1010,125 @@ select:focus{
     max-height: 92vh;
   }
 }
+
+/* ==========================
+   Binder overlay responsivo
+   ========================== */
+
+/* garante que o overlay fique preso no slot */
+.binder-slot { position: relative; overflow: hidden; }
+
+/* overlay base */
+.binder-overlay{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+
+  padding: 10px;
+  background: rgba(0,0,0,.55); /* escuro translúcido */
+  color: #fff;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease;
+
+  /* evita estourar em cartas pequenas */
+  max-height: 100%;
+  box-sizing: border-box;
+}
+
+/* mostrar no hover (desktop) */
+.binder-slot:hover .binder-overlay{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* linha do set (logo + nome) */
+.binder-setrow{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0; /* importante p/ ellipsis funcionar */
+}
+
+.binder-setlink{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.binder-setlink:hover{ text-decoration: underline; }
+
+.binder-setlogo{
+  width: 22px;           /* ajuste fino */
+  height: 22px;
+  flex: 0 0 22px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.35));
+}
+
+/* texto do set com ellipsis */
+.binder-settext{
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* título da carta (máx 2 linhas) */
+.binder-title{
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.15;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* subtítulo (set + número) com ellipsis */
+.binder-subtitle{
+  font-size: 12px;
+  font-weight: 700;
+  opacity: .9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* botões sempre cabem */
+.binder-actions{
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* melhora em telas menores */
+@media (max-width: 520px){
+  .binder-overlay{
+    padding: 8px;
+    gap: 5px;
+  }
+  .binder-title{ font-size: 12px; }
+  .binder-subtitle{ font-size: 11px; }
+  .binder-settext{ font-size: 11px; }
+  .binder-setlogo{ width: 20px; height: 20px; flex-basis: 20px; }
+}
+
+/* Touch devices: como não existe hover, deixamos o overlay acessível.
+   Opção A: mostrar sempre (mais simples e funcional). */
+@media (hover: none) and (pointer: coarse){
+  .binder-overlay{
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
