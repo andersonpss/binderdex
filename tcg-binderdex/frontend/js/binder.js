@@ -298,7 +298,9 @@ function render() {
     const div = document.createElement("div");
     div.className = "binder-slot";
 
-    div.draggable = !__activeBinderMeta?.readonly;
+    const isTouch = matchMedia("(hover: none) and (pointer: coarse)").matches;
+    div.draggable = !__activeBinderMeta?.readonly && !isTouch;
+
 
     renderCard(div, c, g);
     div.addEventListener("click", () => openCardModal(c.id, c.lang));
