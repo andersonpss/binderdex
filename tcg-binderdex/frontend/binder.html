@@ -12,7 +12,7 @@
       <div class="logo">TCG</div>
       <div class="brand-text">
         <div class="brand-title">BinderDex</div>
-        <div class="brand-subtitle">binder 3×3 • toque/clique para ações</div>
+        <div class="brand-subtitle">bender 3×3 • drag & drop</div>
       </div>
     </div>
 
@@ -37,13 +37,15 @@
           <button class="icon-btn" title="Renomear" onclick="renameBinder('binderSelect')">✏️</button>
           <button class="icon-btn" title="Duplicar" onclick="duplicateBinder('binderSelect', loadCollection)">📋</button>
           <button class="icon-btn" title="Somente leitura" onclick="toggleReadonly('binderSelect').then(refreshReadonlyUi)">🔒</button>
-          <button class="icon-btn" title="Editar layout" onclick="toggleLayoutMode()" id="layoutModeBtn" aria-pressed="false">🧩</button>
+          <button class="icon-btn" title="Modo edição (layout)" onclick="toggleLayoutMode()" id="layoutModeBtn" aria-pressed="false">🧩</button>
           <button class="icon-btn" title="Favorito" onclick="setFavorite('binderSelect')">⭐</button>
           <button class="icon-btn" title="Exportar JSON" onclick="exportBinderJSON('binderSelect')">📤</button>
           <button class="icon-btn" title="Exportar PDF" onclick="exportBinderPDF('binderSelect')">📄</button>
           <button class="icon-btn danger" title="Excluir Fichário" onclick="deleteBinder('binderSelect', loadCollection)">🗑️</button>
         </div>
       </div>
+
+      <span class="mode-indicator" id="layoutModeIndicator" style="display:none;">MODO EDIÇÃO ATIVO</span>
 
       <div class="pager">
         <button class="btn" onclick="prevPage()">⬅</button>
@@ -58,7 +60,7 @@
 
     <section class="hint">
       <span class="hint-dot"></span>
-      <span id="layoutHintText">Toque/clique na carta para ver ações. Para reorganizar no celular, ative 🧩 (modo layout) e toque na carta de origem e depois no destino. Use ⇅ para mover por página. Use 🗑️ para remover.</span>
+      Clique na carta para abrir detalhes. Use ⋯ para ações. Para mover/reorganizar, ative 🧩 (modo edição).
     </section>
   </main>
 
