@@ -673,7 +673,7 @@ select:focus{
 
 /* -------- Coleção (carrossel 3D) -------- */
 .collection-stage{
-  margin-top: 16px;
+  margin-top: 36px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -843,7 +843,7 @@ select:focus{
   background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
 }
 
-.collection-meta-wrap{ margin-top: 18px; display:flex; justify-content:center; }
+.collection-meta-wrap{ margin-top: 48px; display:flex; justify-content:center; }
 .collection-meta{
   width: min(920px, 100%);
   padding: 12px 14px;
