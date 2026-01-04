@@ -322,6 +322,15 @@ select:focus{
   cursor: grab;
 }
 .binder-slot:active{ cursor: grabbing; }
+
+.binder.layout-edit .binder-slot{ cursor: pointer; }
+.binder.layout-edit .binder-slot.empty{ cursor: pointer; }
+.binder-slot.is-selected{
+  outline: 3px solid rgba(99,102,241,.85);
+  outline-offset: -3px;
+  box-shadow: 0 0 0 2px rgba(99,102,241,.20), 0 10px 30px rgba(0,0,0,.35);
+}
+
 .binder-slot.empty{
   display:flex;
   align-items:center;
@@ -359,8 +368,8 @@ select:focus{
   pointer-events: none;
 }
 
-.binder-slot:hover .binder-overlay,
-.binder-slot:focus-within .binder-overlay{
+.binder-slot.is-open .binder-overlay,
+.binder-slot.is-open:focus-within .binder-overlay{
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
