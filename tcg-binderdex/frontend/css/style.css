@@ -408,7 +408,7 @@ select:focus{
 .binder-actions{
   margin-top: 8px;
   display:center;
-  justify-content:space-between;
+  justify-content: space-around;
   gap: 8px;
 }
 
