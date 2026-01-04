@@ -1187,7 +1187,7 @@ select:focus{
   margin: 8px 0 10px;
 }
 
-/* Badge do indicador (mantém o texto original, só adiciona a “tag”) */
+/* Badge do indicador de modo edição (sem alterar o texto existente) */
 .mode-indicator::before{
   content: "EDIT";
   font-size: 10px;
@@ -1199,6 +1199,7 @@ select:focus{
   border: 1px solid rgba(245,158,11,.45);
   color: rgba(255,255,255,.96);
 }
+
 
 .binder-slot.is-selected{
   outline: 3px solid rgba(99,102,241,.85);
