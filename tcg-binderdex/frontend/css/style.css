@@ -907,3 +907,106 @@ select:focus{
 .carousel-viewport{
   perspective: 1200px;
 }
+
+/* ==========================
+   Modal (detalhes) responsivo
+   - Scroll apenas vertical
+   - Painel limitado ao viewport
+   - Grid vira 1 coluna no mobile
+   ========================== */
+
+.modal{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.modal-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+}
+
+/* Painel responsivo */
+.modal-panel{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  /* Largura responsiva */
+  width: min(92vw, 520px);
+
+  /* Altura responsiva */
+  max-height: min(78vh, 620px);
+
+  /* Visual */
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header fixo, corpo scrollável */
+.modal-header{
+  flex: 0 0 auto;
+}
+
+.modal-body{
+  flex: 1 1 auto;
+
+  /* Scroll só vertical */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Evita “pular” layout */
+  -webkit-overflow-scrolling: touch;
+  padding: 12px;
+}
+
+/* Grid do conteúdo: 2 colunas no desktop, 1 no mobile */
+.modal-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+/* Imagem se adapta sem estourar */
+.modal-cardimg img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Evita textos estourando horizontalmente */
+.modal-panel *{
+  max-width: 100%;
+  word-break: break-word;
+}
+
+/* Mobile: empilha */
+@media (max-width: 560px){
+  .modal-panel{
+    width: min(94vw, 520px);
+    max-height: 84vh;
+  }
+
+  .modal-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .modal-body{
+    padding: 10px;
+  }
+}
+
+/* Telas baixas: garante que cabe */
+@media (max-height: 520px){
+  .modal-panel{
+    top: 12px;
+    transform: translate(-50%, 0);
+    max-height: 92vh;
+  }
+}
