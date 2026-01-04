@@ -378,23 +378,18 @@ select:focus{
 
 .binder-setlink{
   display:flex;
-  flex-direction: column;
-  align-items:flex-start;
-  gap: 4px;
+  align-items:center;
+  gap: 8px;
   text-decoration:none;
   color: rgba(255,255,255,.92);
 }
 
-
 .binder-setlogo{
-  width: auto;
-  height: 28px;
-  max-width: 100%;
+  width: 40px;
+  height: 20px;
   object-fit: contain;
-  display:block;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,.45));
 }
-
 
 .binder-settext{
   font-size: 12px;
@@ -413,11 +408,9 @@ select:focus{
 .binder-actions{
   margin-top: 8px;
   display:flex;
-  flex-wrap: wrap;
-  justify-content:flex-start;
+  justify-content:space-between;
   gap: 8px;
 }
-
 
 .pager{
   margin-top: 12px;
@@ -1030,31 +1023,42 @@ select:focus{
 
 /* overlay base */
 .binder-overlay{
+/* overlay base */
+.binder-overlay{
   position: absolute;
-  inset: 0;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  top: auto;              /* altura dinâmica */
+  height: auto;
+  max-height: calc(100% - 16px);
+  padding: 10px 10px 8px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 6px;
-
-  padding: 10px;
-  background: rgba(0,0,0,.55); /* escuro translúcido */
-  color: #fff;
-
+  gap: 8px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .15s ease;
-
-  /* evita estourar em cartas pequenas */
-  max-height: 100%;
+  transform: translateY(6px);
+  transition: opacity .12s ease, transform .12s ease;
+  background: rgba(0,0,0,.62);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
   box-sizing: border-box;
 }
 
-/* mostrar no hover (desktop) */
-.binder-slot:hover .binder-overlay{
+/* mostrar apenas no clique (JS adiciona .is-open no slot) */
+.binder-slot.is-open .binder-overlay{
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
 }
+
+/* no modo edição de layout, nunca mostrar overlay */
+.binder.layout-edit .binder-slot .binder-overlay{
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 
 /* linha do set (logo + nome) */
 .binder-setrow{
