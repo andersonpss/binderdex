@@ -1174,18 +1174,17 @@ select:focus{
 .binder.layout-edit .binder-slot.is-open .binder-overlay{ opacity:0; pointer-events:none; }
 
 .mode-indicator{
-  display:flex;
+  display:inline-flex;
   align-items:center;
-  justify-content:center;
   gap:8px;
-  padding:10px 12px;
-  border-radius: 12px;
-  background: rgba(234,179,8,.14);
-  border: 2px solid rgba(234,179,8,.75);
-  color: rgba(255,255,255,.95);
-  font-weight: 800;
+  padding:6px 10px;
+  border-radius: 999px;
+  background: rgba(234,179,8,.18);
+  border: 1px solid rgba(234,179,8,.35);
+  color: rgba(255,255,255,.92);
+  font-weight: 700;
   letter-spacing: .3px;
-  margin: 10px 0 12px;
+  margin: 8px 0 10px;
 }
 
 /* Badge do indicador (mantém o texto original, só adiciona a “tag”) */
