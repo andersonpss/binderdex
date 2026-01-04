@@ -1025,9 +1025,9 @@ select:focus{
 /* overlay base */
 .binder-overlay{
   position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
   top: auto;              /* altura dinâmica */
   height: auto;
   max-height: calc(100% - 16px);
