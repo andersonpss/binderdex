@@ -297,20 +297,7 @@ function render() {
 
     const div = document.createElement("div");
     div.className = "binder-slot";
-    // Evita overlay durante o clique
-div.addEventListener("mousedown", () => {
-  div.classList.add("is-pressing");
-});
 
-div.addEventListener("mouseup", () => {
-  div.classList.remove("is-pressing");
-});
-
-// segurança extra (caso o mouse saia do slot)
-div.addEventListener("mouseleave", () => {
-  div.classList.remove("is-pressing");
-});
-//
     div.draggable = !__activeBinderMeta?.readonly;
 
     renderCard(div, c, g);
