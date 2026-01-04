@@ -322,15 +322,6 @@ select:focus{
   cursor: grab;
 }
 .binder-slot:active{ cursor: grabbing; }
-
-.binder.layout-edit .binder-slot{ cursor: pointer; }
-.binder.layout-edit .binder-slot.empty{ cursor: pointer; }
-.binder-slot.is-selected{
-  outline: 3px solid rgba(99,102,241,.85);
-  outline-offset: -3px;
-  box-shadow: 0 0 0 2px rgba(99,102,241,.20), 0 10px 30px rgba(0,0,0,.35);
-}
-
 .binder-slot.empty{
   display:flex;
   align-items:center;
@@ -357,9 +348,12 @@ select:focus{
 
 .binder-overlay{
   position:absolute;
-  inset: auto 0 0 0;
+  inset: auto 8px 8px 8px;
   padding: 10px 10px 10px;
   background: rgba(0,0,0,.68);
+  border-radius: 12px;
+  max-height: 45%;
+  overflow: auto;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   opacity: 0;
@@ -1146,4 +1140,44 @@ select:focus{
 .binder-slot.is-pressing .binder-overlay{
   opacity: 0 !important;
   pointer-events: none !important;
+}
+
+
+/* Binder overlay toggle + layout edit indicator */
+.overlay-toggle{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:34px;
+  height:34px;
+  border-radius: 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.binder.layout-edit .overlay-toggle{ display:none; }
+.binder.layout-edit .binder-slot.is-open .binder-overlay{ opacity:0; pointer-events:none; }
+
+.mode-indicator{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius: 999px;
+  background: rgba(234,179,8,.18);
+  border: 1px solid rgba(234,179,8,.35);
+  color: rgba(255,255,255,.92);
+  font-weight: 700;
+  letter-spacing: .3px;
+  margin: 8px 0 10px;
+}
+
+.binder-slot.is-selected{
+  outline: 3px solid rgba(99,102,241,.85);
+  outline-offset: -3px;
+  box-shadow: 0 0 0 2px rgba(99,102,241,.20), 0 10px 30px rgba(0,0,0,.35);
 }
