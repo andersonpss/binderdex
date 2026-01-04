@@ -324,7 +324,7 @@ for (let i = 0; i < perPage; i++) {
 
 async function moveCard(from, to) {
   try {
-    const r = await fetch("http://127.0.0.1:8000/collection/move", {
+    const r = await fetch(${API_BASE}${endpoint}, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ from_index: from, to_index: to }),
@@ -361,7 +361,7 @@ async function removeCard(index) {
   if (!ok) return;
 
   try {
-    const r = await fetch(`http://127.0.0.1:8000/collection/remove?index=${index}`, { method: "POST" });
+    const r = await fetch(${API_BASE}/collection/remove?index=${encodeURIComponent(index)}, { method: "POST" });
     if (!r.ok) {
       let msg = "Falha ao remover";
       try { msg = (await r.json()).detail || msg; } catch {}
