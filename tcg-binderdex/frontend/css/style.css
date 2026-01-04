@@ -1044,11 +1044,10 @@ select:focus{
 }
 
 /* mostrar no hover (desktop) */
-.binder-slot:hover .binder-overlay{
+.binder-slot.is-open .binder-overlay{
   opacity: 1;
   pointer-events: auto;
 }
-
 /* linha do set (logo + nome) */
 .binder-setrow{
   display: flex;
